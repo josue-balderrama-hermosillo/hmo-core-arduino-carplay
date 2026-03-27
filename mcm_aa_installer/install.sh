@@ -87,7 +87,7 @@ if [ "$1" != "--continue-bg" ]; then
     echo "⚠️  Starting autonomous phase in 5 seconds..."
     sleep 5
     echo ">>> Transitioning to systemd daemon to survive connection drop..."
-    exec systemd-run --unit=mcm-installer --remain-after-exit bash "$0" --continue-bg
+    exec systemd-run --working-directory="$PWD" --unit=mcm-installer --remain-after-exit bash "$(realpath "$0")" --continue-bg
 fi
 
 # Redirecting stdout and stderr to a log file so the script survives USB disconnection
